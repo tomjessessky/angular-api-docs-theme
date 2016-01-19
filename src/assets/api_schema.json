@@ -1,0 +1,212 @@
+[
+  {
+    "method": "get",
+    "url": "/samples/:id",
+    "title": "Get a sample by ID",
+    "request": [
+      {
+        "type": "String",
+        "field": "id",
+        "description": "The sample id"
+      }
+    ],
+    "response": [
+      {
+        "type": "Object",
+        "field": "sample",
+        "description": "sample information"
+      },
+      {
+        "type": "String",
+        "field": "sample.id",
+        "description": "sample id"
+      },
+      {
+        "type": "String",
+        "field": "sample.make",
+        "description": "the manufacturer of the sample"
+      },
+      {
+        "type": "String",
+        "field": "sample.model",
+        "description": "the model of the sample"
+      }
+    ],
+    "example": "curl http://api.example.com/samples/{{id}} -H 'Authorization: {{apiKey}}'"
+  },
+  {
+    "method": "post",
+    "url": "/samples/:id/temperature",
+    "title": "Sample Temperature Setting",
+    "request": [
+      {
+        "type": "String",
+        "field": "id",
+        "description": "The sample id"
+      },
+      {
+        "type": "String",
+        "field": "action",
+        "description": "'START' or 'STOP'."
+      },
+      {
+        "type": "Number",
+        "field": "temperature",
+        "description": "The temperature to set the climate system to. If not present, the climate system will default to the last set temperature."
+      }
+    ],
+    "response": [
+      {
+        "type": "String",
+        "field": "status",
+        "description": "The status of the command"
+      },
+      {
+        "type": "String",
+        "field": "message",
+        "description": "Additional information"
+      }
+    ],
+    "example": "curl http://api.example.com/samples/{{id}}/temperature -X POST -H 'Authorization: {{apiKey}}' -d action=START"
+  },
+  {
+    "method": "post",
+    "url": "/samples/:id/security",
+    "title": "Sample Security Control",
+    "request":  [
+      {
+        "type": "String",
+        "field": "id",
+        "description": "The sample id"
+      },
+      {
+        "type": "String",
+        "field": "action",
+        "description": "'LOCK' to lock, 'UNLOCK' to unlock."
+      }
+    ],
+    "response": [
+      {
+        "type": "String",
+        "field": "status",
+        "description": "The status of the command"
+      },
+      {
+        "type": "String",
+        "field": "message",
+        "description": "Additional information"
+      }
+    ],
+    "example": "curl http://api.example.com/samples/{{id}}/security -X POST -H 'Authorization: {{apiKey}}' -d action=UNLOCK"
+  },
+  {
+    "method": "post",
+    "url": "/samples/:id/fan",
+    "title": "Sample Fan Control",
+    "request": [
+      {
+        "type": "String",
+        "field": "id",
+        "description": "The sample id"
+      },
+      {
+        "type": "String",
+        "field": "action",
+        "description": "'OPEN', 'VENT', or 'CLOSE'."
+      }
+    ],
+    "response": [
+      {
+        "type": "String",
+        "field": "status",
+        "description": "The status of the command"
+      },
+      {
+        "type": "String",
+        "field": "message",
+        "description": "Additional information"
+      }
+    ],
+    "example": "curl http://api.example.com/samples/{{id}}/fan -X POST -H 'Authorization: {{apiKey}}' -d action=OPEN"
+  },
+  {
+    "method": "get",
+    "url": "/samples/:id/panels",
+    "title": "Sample Panels Status",
+    "request": [
+      {
+        "type": "String",
+        "field": "id",
+        "description": "The sample id"
+      }
+    ],
+    "response": [
+      {
+        "type": "Object[]",
+        "field": "panels",
+        "description": "Array of Panel objects"
+      },
+      {
+        "type": "String",
+        "field": "panels.location",
+        "description": "The location of this panel. One of: 'FRONT_LEFT', 'FRONT_RIGHT', 'BACK_LEFT', 'BACK_RIGHT'."
+      },
+      {
+        "type": "Boolean",
+        "field": "panels.isOpen",
+        "description": "true, if this panel is open"
+      }
+    ],
+    "example": "curl http://api.example.com/samples/{{id}}/panels -H 'Authorization: {{apiKey}}'"
+  },
+  {
+    "method": "get",
+    "url": "/samples/:id/battery",
+    "title": "Sample Battery Status",
+    "request": [
+      {
+        "type": "String",
+        "field": "id",
+        "description": "The sample id"
+      }
+    ],
+    "response": [
+      {
+        "type": "Number",
+        "field": "range",
+        "description": "The estimated remaining distance the sample can operate (in minutes)."
+      },
+      {
+        "type": "Number",
+        "field": "percentRemaining",
+        "description": "The remaining level of battery (from 0 to 1)."
+      }
+    ],
+    "example": "curl http://api.example.com/samples/{{id}}/battery -H 'Authorization: {{apiKey}}'"
+  },
+  {
+    "method": "get",
+    "url": "/samples/:id/location",
+    "title": "Sample Location",
+    "request": [
+      {
+        "type": "String",
+        "field": "id",
+        "description": "The sample id"
+      }
+    ],
+    "response": [
+      {
+        "type": "Number",
+        "field": "latitude",
+        "description": "Degrees latitude"
+      },
+      {
+        "type": "Number",
+        "field": "longitude",
+        "description": "Degrees longitude"
+      }
+    ],
+    "example": "curl http://api.example.com/samples/{{id}}/location -H 'Authorization: {{apiKey}}'"
+  }
+]

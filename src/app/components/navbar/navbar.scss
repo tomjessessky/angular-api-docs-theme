@@ -1,0 +1,28 @@
+body {
+	padding-top: 50px;
+}
+
+/* overrides of Bootstrap Navbar defaults */
+.navbar {
+	background-color: #c0392b;
+	border: none;
+	margin-bottom: 0;
+	padding-left: 20px;
+	padding-right: 20px;
+
+	.navbar-brand {
+		padding: 0 0;
+
+		.logo {
+			height: 50px;
+		}
+	}
+
+	.navbar-text {
+		color: white;
+
+		.nav-link {
+			cursor: pointer;
+		}
+	}
+}

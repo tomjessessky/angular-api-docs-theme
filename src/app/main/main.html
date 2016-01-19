@@ -1,0 +1,150 @@
+<navbar></navbar>
+
+<div class="main container-fluid">
+	<div class="row">
+		<div class="col-sm-3 col-lg-2 hidden-xs">
+			<div class="side-nav" id="sideNav">
+				<!-- Nav list -->
+				<ul>
+					<li class="group-name">Concepts</li>
+					<li du-scrollspy="gettingStarted" class="api-li"><a href="#gettingStarted" du-smooth-scroll>Getting Started</a></li>
+					<li du-scrollspy="authentication" class="api-li"><a href="#authentication" du-smooth-scroll>Authentication</a></li>
+					<li class="group-name">API Reference</li>
+					<li ng-repeat="api in main.apiData" class="api-li" du-scrollspy="{{ api.title | camelCase }}">
+						<a ng-href="#{{ api.title | camelCase }}" du-smooth-scroll>{{ api.title }}</a>
+					</li>
+				</ul>
+
+				<!-- API Key -->
+				<ul class="api-key-panel">
+					<li class="group-name">Your API Key</li>
+					<li class="api-key">{{ apiKey }} <a class="create-api-key" ng-click="main.createNewAPIKey()"><span class="glyphicon glyphicon-refresh"></span></a></li>
+				</ul> <!-- end of API Key -->
+
+				<!-- Vehicle ID Panel -->
+				<ul class="vehicle-id-panel">
+					<li class="group-name">Sample Vehicle ID</li>
+					<li class="vehicle-id"><input type="text" ng-model="id" autofocus /></li>
+				</ul> <!-- end of Vehicle ID -->
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-9 col-lg-10">
+			<!-- API and Vehicle ID, Only for Extra Small Screens -->
+			<div class="xs-api-key visible-xs-block">
+				<span style="font-weight: bold;">Your API Key</span> <code>{{ apiKey }}</code> 
+					<a class="create-api-key" ng-click="main.createNewAPIKey()">
+						<span class="glyphicon glyphicon-refresh"></span>
+					</a>
+			</div>
+			<div class="xs-vehicle-id visible-xs-block">
+				<span style="font-weight: bold;">Sample Vehicle ID</span> <input type="text" ng-model="id" autofocus />
+			</div>
+
+			<!-- Getting Started Dummy Text -->
+			<div id="gettingStarted" class="section">
+				<div class="row row-equalized">
+					<div class="col-xs-12 col-md-6 left-col">
+						<h2>Getting Started</h2>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						</p>
+					</div>
+					<div class="col-xs-12 col-md-6 right-col">
+						<!-- this space blank -->
+					</div>
+				</div>
+			</div> <!-- end of Getting Started Dummy Text -->
+
+			<!-- Authentication Dummy Text -->
+			<div id="authentication" class="section">
+				<div class="row row-equalized">
+					<div class="col-xs-12 col-md-6 left-col">
+						<h2>Authentication</h2>
+					</div>
+					<div class="col-xs-12 col-md-6 right-col">
+						<!-- this space blank -->
+					</div>
+				</div>
+				<div class="row row-equalized">
+					<div class="col-xs-12 col-md-6 left-col">
+						<p>
+							Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. 
+						</p>
+					</div>
+					<div class="col-xs-12 col-md-6 right-col">
+						<h3 style="margin-top: 0;">Example</h3>
+						<pre class="language-bash">
+							<code bind-html-compile="main.apiData[0].example" prism></code>
+						</pre>
+					</div>
+				</div>
+			</div> <!-- end of Authentication Dummy Text -->
+
+			<!-- Iterate over all API's -->
+			<div ng-repeat="api in main.apiData" id="{{ api.title | camelCase }}" class="section">
+				<div class="row row-equalized">
+					<div class="col-sm-12 col-md-6 left-col">
+						<h2>{{ api.title }}</h2>
+					</div>
+					<div class="col-sm-12 col-md-6 right-col">
+						<!-- This space left blank -->
+					</div>
+				</div>
+				<div class="row row-equalized">
+					<div class="col-xs-12 col-md-6 left-col">
+						<h3>Request</h3>
+						<table class="table api-table">
+							<tr>
+								<td class="align-right">Method</td>
+								<td>{{ api.method | uppercase }}</td>
+							</tr>
+							<tr>
+								<td class="align-right">URL</td>
+								<td>{{ api.url }}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="col-xs-12 col-md-6 right-col hidden-xs">
+						<h3>Example</h3>
+						<pre class="language-bash">
+							<code bind-html-compile="api.example" prism></code>
+						</pre>
+					</div>
+				</div>
+				<div class="row row-equalized">
+					<div class="col-xs-12 col-md-6 left-col">
+						<h3>Parameters</h3>
+						<table class="table api-table">
+							<tr ng-repeat="field in api.request">
+								<td class="align-right bold">{{ field.field }}</td>
+								<td><span class="field-type">{{ field.type }}</span> <br /> <span ng-bind-html="field.descriptionSafe"></span></td>
+							</tr>
+						</table>
+					</div>
+					<div class="visible-xs-block">
+						<h3>Example</h3>
+						<pre class="language-bash">
+							<code bind-html-compile="api.example" prism></code>
+						</pre>
+					</div>
+					<div class="col-sm-12 col-md-6 right-col">
+						<h3>Response</h3>
+						<table class="table api-table">
+							<tr ng-repeat="field in api.response">
+								<td class="align-right">{{ field.field }}</td>
+								<td><span class="field-type">{{ field.type }}</span> <br /> <span ng-bind-html="field.descriptionSafe"></span></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<!-- add a little extra space to bottom of page -->
+			<div class="row row-equalized" style="height: 100px;">
+				<div class="col-xs-12 col-md-6 col-md-offset-6 right-col">
+					<!-- this space blank -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
